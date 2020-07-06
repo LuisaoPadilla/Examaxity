@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  cita: ILogin[];
   private apiUrl = "api/Login/";
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }

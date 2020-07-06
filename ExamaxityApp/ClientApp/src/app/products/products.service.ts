@@ -8,13 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class ProductsService {
 
-  prod: IProducts[];
   private apiUrl = "api/Products/";
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-
-  getProducts(): Observable<IProducts[]> {
+  getProducts(): Observable<IProducts[]>
+  {
     return this.http.get<IProducts[]>(this.apiUrl);
+  }
+
+  addProducts(product: IProducts): Observable<IProducts>
+  {
+    return this.http.post<IProducts>(this.apiUrl, product);
   }
 }

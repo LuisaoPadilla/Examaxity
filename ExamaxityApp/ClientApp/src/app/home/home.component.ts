@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILogin } from './login';
@@ -8,15 +8,13 @@ import { LoginService } from './login.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent {
-  constructor(private fb: FormBuilder,
-    private citasService: LoginService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+export class HomeComponent implements OnInit {
 
-  public modoEdicion: boolean = false;
+  constructor(private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router) { }
+
   formGroup: FormGroup;
-  public citaId: number;
 
   ngOnInit() {
     this.formGroup = this.fb.group({
@@ -29,12 +27,16 @@ export class HomeComponent {
     let login: ILogin = Object.assign({}, this.formGroup.value);
     console.table(login);
 
-    this.citasService.loginUser(login)
-      .subscribe(persona => this.onSaveSuccess(),
-        error => console.error(error));
+    this.loginService.loginUser(login)
+      .subscribe(login => this.onSaveSuccess(),
+        error => this.onSaveError());
   }
 
   onSaveSuccess() {
     this.router.navigate(["/products"]);
+  }
+
+  onSaveError() {
+    this.router.navigate(["/"]);
   }
 }

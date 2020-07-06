@@ -1,4 +1,4 @@
-<h1>{{modoEdicion ? 'Editar' : 'Agregar'}} Persona</h1>
+<h1>Login</h1>
 <form class="form-horizontal" novalidate
       (ngSubmit)="login()" [formGroup]="formGroup">
   <fieldset>
@@ -6,11 +6,11 @@
     <div class="form-group"
          [ngClass]="{'has-error': (formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && !formGroup.get('nombre').valid }">
       <label class="col-md-2 control-label"
-             for="nombre">Nombre</label>
+             for="nombreId">Nombre</label>
 
       <div class="col-md-8">
         <input class="form-control"
-               id="nombre"
+               id="nombreId"
                type="text"
                required
                formControlName="nombre" />
@@ -30,7 +30,7 @@
       <div class="col-md-8">
         <input class="form-control"
                id="password"
-               type="date"
+               type="password"
                required
                formControlName="password" />
         <span class="help-block" *ngIf="(formGroup.get('password').touched || formGroup.get('password').dirty) && formGroup.get('password').errors">
@@ -47,11 +47,11 @@
           <button class="btn btn-primary"
                   type="submit"
                   [disabled]="!formGroup.valid">
-            Salvar
+            Login
           </button>
           <button class="btn"
                   type="button"
-                  [routerLink]='["/"]'>
+                  [routerLink]='["/personas"]'>
             Cancelar
           </button>
         </span>
